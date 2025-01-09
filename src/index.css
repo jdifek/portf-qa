@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	color-scheme: dark;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+		'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+		'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: relative;
+}
+
+/* Add a pseudo-element for the fixed background image */
+body::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url('/src/imgs/background.png') no-repeat center center;
+	background-size: cover;
+	z-index: -2;
+}
+
+/* Add another pseudo-element for the animated gradient */
+body::after {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(
+		circle,
+		rgba(50, 8, 61, 0.8) 5%,
+		rgba(23, 2, 28, 0.8) 58%,
+		rgba(0, 0, 0, 0.8) 93%
+	);
+	background-size: 400% 400%;
+	animation: gradientAnimation 30s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+	z-index: -1;
+}
+
+/* Пример анимации градиента */
+@keyframes gradientAnimation {
+	0% {
+		background-position: 0% 0%;
+	}
+	50% {
+		background-position: 100% 100%;
+	}
+	100% {
+		background-position: 0% 0%;
+	}
+}
+
+/* Канвас для частиц */
+#particleCanvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none; /* Частицы не мешают взаимодействию с интерфейсом */
+	z-index: 1;
+}
+
+/* Стили для контейнера линий */
+.lines-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	display: flex;
+	justify-content: space-around;
+	pointer-events: none;
+}
+
+/* Стиль для каждой линии */
+.line {
+	width: 1px;
+	height: 100%;
+	background: rgba(200, 200, 200, 0.2);
+}
+
+@keyframes fadeInOut {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.animate-fade-in-out {
+	animation: fadeInOut 3s ease-in-out forwards;
+}
+
+/* Включить вертикальный слайдер */
+.swiper {
+	height: 500px;
+}
+
+.swiper-pagination {
+	position: absolute;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+/* Стили для точек */
+.swiper-pagination-bullet {
+	width: 12px;
+	height: 12px;
+	background-color: #9ca3af; /* Серый цвет для обычных точек */
+	border-radius: 50%;
+	margin: 8px; /* Расстояние между точками */
+	opacity: 0.7;
+	transition: background-color 0.3s, transform 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+	background-color: #ffffff; /* Белый цвет для активной точки */
+	transform: scale(1.2); /* Увеличение активной точки */
+	opacity: 1;
+}
+
+@media (max-width: 768px) {
+	.swiper {
+		max-height: 500px; /* Высота автоматически подстраивается */
+	}
+}
+
+/* неоновая линия в навигации */
+@keyframes glow {
+	0% {
+		box-shadow: 0px 0px 16px #3b82f6, 0px 0px 32px #3b82f6;
+	}
+	50% {
+		box-shadow: 0px 0px 24px #3b82f6, 0px 0px 40px #3b82f6;
+	}
+	100% {
+		box-shadow: 0px 0px 16px #3b82f6, 0px 0px 32px #3b82f6;
+	}
+}
+
+.animate-glow {
+	animation: glow 1.5s infinite alternate;
+}
+
+.karla-font {
+	font-family: 'Karla', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 600;
+	font-style: normal;
+}
+
+/* Add these styles for the split text effect */
+.split-text {
+	position: relative;
+	display: inline-block;
+}
+
+.split-text span:first-child {
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: white;
+	z-index: 1;
+}
+
+.split-text span:last-child {
+	position: relative;
+	bottom: -2px;
+	color: transparent;
+	background-clip: text;
+	-webkit-background-clip: text;
+	background-image: linear-gradient(to bottom, rgb(75, 75, 75), white);
+	z-index: 0;
+}
